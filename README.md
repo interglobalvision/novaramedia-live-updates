@@ -9,7 +9,7 @@ The WordPress Plugin Boilerplate includes the following files:
 * `.gitignore`. Used to exclude certain files from the repository.
 * `CHANGELOG.md`. The list of changes to the core project.
 * `README.md`. The file that you’re currently reading.
-* A `plugin-name` directory that contains the source code - a fully executable WordPress plugin.
+* A `novaramedia-live-updates` directory that contains the source code - a fully executable WordPress plugin.
 
 ## Features
 
@@ -26,7 +26,7 @@ Note that this will activate the source code of the Boilerplate, but because the
 
 Run this to replace plugin name:
 ```
-find . -type f -name '*.*' -exec sed -i '' s/plugin-name/new-plugin-name/ {} +
+find . -type f -name '*.*' -exec sed -i '' s/novaramedia-live-updates/new-novaramedia-live-updates/ {} +
 ```
 
 ## WordPress.org Preparation
@@ -69,11 +69,11 @@ For reference, [here's a discussion](http://make.wordpress.org/themes/2013/03/04
 
 Note that if you include your own classes, or third-party libraries, there are three locations in which said files may go:
 
-* `plugin-name/includes` is where functionality shared between the admin area and the public-facing parts of the site reside
-* `plugin-name/admin` is for all admin-specific functionality
-* `plugin-name/public` is for all public-facing functionality
+* `novaramedia-live-updates/includes` is where functionality shared between the admin area and the public-facing parts of the site reside
+* `novaramedia-live-updates/admin` is for all admin-specific functionality
+* `novaramedia-live-updates/public` is for all public-facing functionality
 
-Note that previous versions of the Boilerplate did not include `Plugin_Name_Loader` but this class is used to register all filters and actions with WordPress.
+Note that previous versions of the Boilerplate did not include `Novaramedia_Live_Updates_Loader` but this class is used to register all filters and actions with WordPress.
 
 The example code provided shows how to register your hooks with the Loader class.
 
