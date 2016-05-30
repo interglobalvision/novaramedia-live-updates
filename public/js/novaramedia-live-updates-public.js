@@ -18,11 +18,13 @@ NovaraLiveUpdates = {
   },
 
   updateContent: function(data, status) {
-    $oldContent = $('#updatable-content');
-    $newContent = $(data).find('#updatable-content');
+    if ( status === 'success' ) {
+      $oldContent = $('#updatable-content');
+      $newContent = $(data).find('#updatable-content');
 
-    if( $oldContent.html() !== $newContent.html() ) {
-      $oldContent.html( $newContent.html() );
+      if( $oldContent.html() !== $newContent.html() ) {
+        $oldContent.html( $newContent.html() );
+      }
     }
   }
 };
