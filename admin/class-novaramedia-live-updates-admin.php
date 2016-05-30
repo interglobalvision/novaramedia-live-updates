@@ -100,4 +100,57 @@ class Novaramedia_Live_Updates_Admin {
 
 	}
 
+	/**
+	 * Register metaboxes
+	 *
+	 * @since    1.0.0
+	 */
+	public function add_meta_boxes() {
+    /*
+     * Add 'Enable Live Updates' metabox for posts.
+     */
+
+    add_meta_box( $this->novaramedia_live_updates . '_updates_enabled', 'Live Updates', array( $this, 'update_enabled_callback' ), 'post', 'side' );
+
+
+  }
+
+  public function update_enabled_callback( $post ) {
+    // Add an nonce field so we can check for it later.
+    wp_nonce_field( $this->novaramedia_live_updates, $this->novaramedia_live_updates . '_updates_enabled_nonce' );
+
+    // Get set value
+    $updates_enabled_value = get_post_meta( $post->ID, 'novara_live_updates_enabled', true );
+
+    // Check
+    $checked = $updates_enabled_value == 'on' ? 'checked="true"' : '';
+
+    // Output the metabox
+    echo '<p>';
+    echo '<label for="novaramedia-live-updates-enabled-metabox">Enable Live Updates</label><input type="checkbox" id="novaramedia-live-updates-enabled-metabox" name="novaramedia-live-updates-enabled-metabox" '. $checked . ' style="margin-left: 4px">';
+    echo '</p>';
+
+  }
+
+  /**
+   * Save metabox values
+   */
+  public function save_post_meta( $post_id ) {
+
+    // Checks save status
+    $is_autosave = wp_is_post_autosave( $post_id );
+    $is_revision = wp_is_post_revision( $post_id );
+    $is_valid_nonce = ( isset( $_POST[ $this->novaramedia_live_updates . 'updates_enabled_nonce' ] ) && wp_verify_nonce( $_POST[ $this->novaramedia_live_updates . '_updates_enabled_nonce' ], basename( __FILE__ ) ) ) ? 'true' : 'false';
+
+    // Exits script depending on save status
+    if ( $is_autosave || $is_revision || !$is_valid_nonce ) {
+      return;
+    }
+
+    // Checks for input and sanitizes/saves if needed
+    update_post_meta( $post_id, 'novara_live_updates_enabled', sanitize_text_field( $_POST[ 'novaramedia-live-updates-enabled-metabox' ] ) );
+
+  }
+
+
 }
