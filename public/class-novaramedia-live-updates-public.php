@@ -91,13 +91,21 @@ class Novaramedia_Live_Updates_Public {
   public function body_class($classes) {
     global $post;
 
-    if ( is_single() ) {
-      if( get_post_meta( $post->ID, 'novara_live_updates_enabled', true ) == 'on' ) {
-        $classes[] .= 'live-updated';
-      }
+    if ( is_single() && get_post_meta( $post->ID, 'novara_live_updates_enabled', true ) == 'on' ) {
+      $classes[] .= 'live-updated';
     }
 
     return $classes;
+  }
+
+  public function wrap_the_content($content) {
+    global $post;
+
+    if ( is_single() && get_post_meta( $post->ID, 'novara_live_updates_enabled', true ) == 'on' ) {
+      $content = '<div id="updatable-content">' . $content . " </div>";
+    }
+
+    return  $content;
   }
 
 }
