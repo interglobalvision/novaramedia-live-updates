@@ -60,20 +60,11 @@ class Novaramedia_Live_Updates_Public {
 	 * @since    1.0.0
 	 */
 	public function enqueue_styles() {
+    global $post;
 
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Novaramedia_Live_Updates_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Novaramedia_Live_Updates_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
-
-		wp_enqueue_style( $this->novaramedia_live_updates, plugin_dir_url( __FILE__ ) . 'css/novaramedia-live-updates-public.css', array(), $this->version, 'all' );
+    if ( is_single() && get_post_meta( $post->ID, 'novara_live_updates_enabled', true ) == 'on' ) {
+      wp_enqueue_style( $this->novaramedia_live_updates, plugin_dir_url( __FILE__ ) . 'css/novaramedia-live-updates-public.css', array(), $this->version, 'all' );
+    }
 
 	}
 
@@ -83,21 +74,30 @@ class Novaramedia_Live_Updates_Public {
 	 * @since    1.0.0
 	 */
 	public function enqueue_scripts() {
+    global $post;
 
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Novaramedia_Live_Updates_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Novaramedia_Live_Updates_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
-
-		wp_enqueue_script( $this->novaramedia_live_updates, plugin_dir_url( __FILE__ ) . 'js/novaramedia-live-updates-public.js', array( 'jquery' ), $this->version, false );
+    if ( is_single() && get_post_meta( $post->ID, 'novara_live_updates_enabled', true ) == 'on' ) {
+      wp_enqueue_script( $this->novaramedia_live_updates, plugin_dir_url( __FILE__ ) . 'js/novaramedia-live-updates-public.js', array( 'jquery' ), $this->version, false );
+    }
 
 	}
+
+  /* 
+   * Add the class 'live-updated' to body classes.
+   * Just in case
+	 *
+	 * @since    1.0.0
+   */
+  public function body_class($classes) {
+    global $post;
+
+    if ( is_single() ) {
+      if( get_post_meta( $post->ID, 'novara_live_updates_enabled', true ) == 'on' ) {
+        $classes[] .= 'live-updated';
+      }
+    }
+
+    return $classes;
+  }
 
 }
