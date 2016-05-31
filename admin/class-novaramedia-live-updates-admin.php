@@ -127,7 +127,7 @@ class Novaramedia_Live_Updates_Admin {
 
     // Output the metabox
     echo '<p>';
-    echo '<label for="novaramedia-live-updates-enabled-metabox">Enable Live Updates</label><input type="checkbox" id="novaramedia-live-updates-enabled-metabox" name="novaramedia-live-updates-enabled-metabox" '. $checked . ' style="margin-left: 4px">';
+    echo '<label for="novaramedia-live-updates-enabled-metabox"><input type="checkbox" id="novaramedia-live-updates-enabled-metabox" name="novaramedia-live-updates-enabled-metabox" '. $checked . '>Enable Live Updates</label>';
     echo '</p>';
 
   }
