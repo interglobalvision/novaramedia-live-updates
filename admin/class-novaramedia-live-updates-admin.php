@@ -148,7 +148,13 @@ class Novaramedia_Live_Updates_Admin {
     }
 
     // Checks for input and sanitizes/saves if needed
-    update_post_meta( $post_id, 'novara_live_updates_enabled', sanitize_text_field( $_POST[ 'novaramedia-live-updates-enabled-metabox' ] ) );
+    if( isset($_POST['novaramedia-live-updates-enabled-metabox'] ) ) {
+      $checked_value = sanitize_text_field( $_POST[ 'novaramedia-live-updates-enabled-metabox' ] );
+    } else {
+      $checked_value = false;
+    }
+
+    update_post_meta( $post_id, 'novara_live_updates_enabled', $checked_value );
 
   }
 
