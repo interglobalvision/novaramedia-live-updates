@@ -154,8 +154,13 @@ class Novaramedia_Live_Updates {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
+		// Setup metaboxes
 		$this->loader->add_action( 'add_meta_boxes', $plugin_admin, 'add_meta_boxes' );
+		// On save hook to save meta value
 		$this->loader->add_action( 'save_post', $plugin_admin, 'save_post_meta' );
+		// Register custom editor button for divisions
+		$this->loader->add_action( 'mce_external_plugins', $plugin_admin, 'add_mce_external_plugins' );
+		$this->loader->add_action( 'mce_buttons', $plugin_admin, 'add_mce_buttons' );
 
 	}
 
