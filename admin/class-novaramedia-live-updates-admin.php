@@ -158,5 +158,32 @@ class Novaramedia_Live_Updates_Admin {
 
   }
 
+  /**
+   * Add TinyMCE plugin declaration javascript
+   */
+  public function add_mce_external_plugins( $plugin_array ) {
+
+    if ( get_user_option( 'rich_editing' ) !== 'true' ) {
+      return;
+    }
+
+    $plugin_array['divider'] = plugin_dir_url( __FILE__ ) . 'js/novaramedia-live-updates-tinymce.js';
+    return $plugin_array;
+
+  }
+
+  /**
+   * Add register TinyMCE button
+   */
+  public function add_mce_buttons( $buttons ) {
+
+    if ( ! current_user_can( 'edit_posts' ) && ! current_user_can( 'edit_pages' ) ) {
+      return;
+    }
+
+    array_push( $buttons, 'divider' );
+    return $buttons;
+
+  }
 
 }
