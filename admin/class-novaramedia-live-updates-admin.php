@@ -163,8 +163,8 @@ class Novaramedia_Live_Updates_Admin {
    */
   public function flush_w3_cache( $post_id ) {
 
-    if (function_exists('w3tc_flush_post')) {
-      w3tc_flush_post($post_id);
+    if (function_exists('w3tc_flush_posts')) {
+      w3tc_flush_posts();
     }
 
   }
