@@ -135,7 +135,7 @@ class Novaramedia_Live_Updates_Admin {
   /**
    * Save metabox values
    */
-  public function save_post_meta( $post_id ) {
+  public function save_post( $post_id ) {
 
     // Checks save status
     $is_autosave = wp_is_post_autosave( $post_id );
@@ -147,6 +147,11 @@ class Novaramedia_Live_Updates_Admin {
       return;
     }
 
+    // Flush W3 Cache if set
+    if (function_exists('w3tc_flush_posts')) {
+      w3tc_flush_posts();
+    }
+
     // Checks for input and sanitizes/saves if needed
     if( isset($_POST['novaramedia-live-updates-enabled-metabox'] ) ) {
       $checked_value = sanitize_text_field( $_POST[ 'novaramedia-live-updates-enabled-metabox' ] );
@@ -155,17 +160,6 @@ class Novaramedia_Live_Updates_Admin {
     }
 
     update_post_meta( $post_id, 'novara_live_updates_enabled', $checked_value );
-
-  }
-
-  /**
-   * Flush cache if W3 cache is installed
-   */
-  public function flush_w3_cache( $post_id ) {
-
-    if (function_exists('w3tc_flush_posts')) {
-      w3tc_flush_posts();
-    }
 
   }
 
